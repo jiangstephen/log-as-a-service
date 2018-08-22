@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="socket" class="com.splunk.logging.TcpAppender">
+		<remoteHost>sjiang-vm</remoteHost>
+		<port>15000</port>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+		<pattern>%date{ISO8601} [%thread] %level: %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<logger name="com.splunk" level = "trace">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+	<logger name="ch.qos.logback" level="trace">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="splunk.logger" additivity="false" level="debug">
+		<appender-ref ref="socket"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<root level="debug">
+		<appender-ref ref="socket"/>
+		<appender-ref ref="STDOUT"/>
+	</root>
+</configuration>
