@@ -31,7 +31,7 @@ public class SplunkLogging {
 			receiver.log("main", logArgs, "hello splunk event" +i);
 		}
 		
-		System.exit(0);
+		//System.exit(0);
 	}
 
 }
